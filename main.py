@@ -28,7 +28,7 @@ def	get_variables():
 	f0 = 1
 
 	while (f0):
-		my_regex = "[\d\.\d]+.{1}\*.{1}X\^" + str(exp)
+		my_regex = "[\+\-\s]?.[\d\.\d]*.{1}\*.{1}X\^" + str(exp)
 		f0 = re.findall(my_regex, polynome)
 		print(exp, f0)
 		exp+=1
