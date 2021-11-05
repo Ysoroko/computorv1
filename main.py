@@ -44,22 +44,22 @@ def	sqrt(n):
 # 					of "X^" + str(current_exponent)
 # 					current exponent starts at 0 and goes up (X^0, X^1 etc)
 def	get_regex(current_exponent):
-	ret = "[\+\-]?.[\d\.\d]*.[\s\*]+.{1}X\^" + str(current_exponent)
+	ret = "[\+\-]?[\s]?[\d\.\d]*[\s\*]+.X\^" + str(current_exponent)
 	return (ret)
 
 # This function is responsible for finding the highest exponent present in the polynome
 # Example" "5 * X^0 + 4 * X^1 - 9.3 * X^18 = 1 * X^0" --> will return "18"
 def	get_highest_exponent(polynome):
-	regex = ".{1}X\^.[\d\d]*"
+	regex = ".{1}X\^.[\d]*.[\s]*"
 	regex_result = re.findall(regex, polynome)
+	print(regex_result)
 	regex2 = "[\d]+"
 	c_max = 0
+	lis = list()
 	for i in range (0, len(regex_result)):
 		regex_sub_result = re.findall(regex2, regex_result[i])
-		expo_found = int(regex_sub_result[0])
-		if (expo_found > int(c_max)):
-			c_max = expo_found
-	return (int(c_max))
+		lis.append(regex_sub_result)
+	return (int(max(lis)[0]))
 
 def	get_variables():
 	polynome = sys.argv[1]
