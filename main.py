@@ -46,11 +46,19 @@ def	get_regex(current_exponent):
 	ret = "[\+\-]?.[\d\.\d]*.[\s\*]*.{1}X\^" + str(current_exponent)
 	return (ret)
 
+def	get_highest_exponent(polynome):
+	regex = ".{1}X\^\d"
+	regex_result = re.findall(regex, polynome)
+	for i in range (0, len(regex_result)):
+		l = len(regex_result[i])
+		print((regex_result[i])[l - 1])
+
 def	get_variables():
 	polynome = sys.argv[1]
 	exp = 0
 	f0 = 1
 
+	get_highest_exponent(polynome)
 	while (f0):
 		my_regex = get_regex(exp)
 		f0 = re.findall(my_regex, polynome)
