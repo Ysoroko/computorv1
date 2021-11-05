@@ -36,30 +36,36 @@ def	sqrt(n):
 # 					'\d' stands for digits, \. = '.' (so digits, '.', digits)
 # 					'*' specifies that any number of occurences can be present
 #					(-42.24576864 or 0 both satisfy the pattern)
-# 4) [\s\*]*.	--> next section is composed of spaces and characters '*'
+# 4) [\s\*]+.	--> next section is composed of spaces and characters '*'
 #					'\s' stands for "spaces". Any number of occurrences is
 #					accepted
+#					'+' stands for "at least one occurence of spaces or '*' must be there"
 # 5) {1}X\^		--> next section is composed of exactly one occurence
 # 					of "X^" + str(current_exponent)
 # 					current exponent starts at 0 and goes up (X^0, X^1 etc)
 def	get_regex(current_exponent):
-	ret = "[\+\-]?.[\d\.\d]*.[\s\*]*.{1}X\^" + str(current_exponent)
+	ret = "[\+\-]?.[\d\.\d]*.[\s\*]+.{1}X\^" + str(current_exponent)
 	return (ret)
 
+# This function is responsible for finding the highest exponent present in the polynome
+# Example" "5 * X^0 + 4 * X^1 - 9.3 * X^18 = 1 * X^0" --> will return "18"
 def	get_highest_exponent(polynome):
-	regex = ".{1}X\^\d"
+	regex = ".{1}X\^.[\d\d]*"
 	regex_result = re.findall(regex, polynome)
+	regex2 = "[\d]+"
+	c_max = 0
 	for i in range (0, len(regex_result)):
-		l = len(regex_result[i])
-		print((regex_result[i])[l - 1])
+		regex_sub_result = re.findall(regex2, regex_result[i])
+		expo_found = int(regex_sub_result[0])
+		if (expo_found > int(c_max)):
+			c_max = expo_found
+	return (int(c_max))
 
 def	get_variables():
 	polynome = sys.argv[1]
 	exp = 0
-	f0 = 1
-
-	get_highest_exponent(polynome)
-	while (f0):
+	ex_max = get_highest_exponent(polynome)
+	while (exp <= ex_max):
 		my_regex = get_regex(exp)
 		f0 = re.findall(my_regex, polynome)
 		print(exp, f0)
@@ -69,7 +75,7 @@ def	get_variables():
 def	main():
 	if (len(sys.argv) != 2):
 		print("Program arguments error")
-		return ;
+		return
 	get_variables()
 
 # "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
