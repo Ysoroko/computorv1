@@ -30,8 +30,7 @@ def	sqrt(n):
 # 1) [\+\-]?	-->	starts with ['+' or '-']. '?' specifies that it starts
 #					with only 0 or 1 occurence of '+' or '-'
 #					(Example: in string "+-+-+-24" we will get "-24")
-# 2) .			--> indicates the start of the next rule
-#					(we are no more looking for '+' or '-')
+# 2) [\s]*			--> followed by any amount of spaces
 # 3) [\d\.\d]*.	--> next section of the string must be composed of:
 # 					'\d' stands for digits, \. = '.' (so digits, '.', digits)
 # 					'*' specifies that any number of occurences can be present
@@ -44,7 +43,13 @@ def	sqrt(n):
 # 					of "X^" + str(current_exponent)
 # 					current exponent starts at 0 and goes up (X^0, X^1 etc)
 def	get_regex(current_exponent):
-	ret = "[\+\-]?[\s]?[\d\.\d]*[\s\*]+.X\^" + str(current_exponent)
+	base_coeff = "[\+\-]?[\s]*[\d]+[\.]?[\d]?[\s\*]+X\^" + str(current_exponent)
+	with_coefficients = base_coeff + "[^\d]" + "|" + base_coeff + "$"
+
+	base_no_coeff = "[\+\-]?[\s]*X\^" + str(current_exponent)
+	without_coefficients = base_no_coeff + "[^\d]" + "|" + base_no_coeff + "$"
+
+	ret = with_coefficients + "|" + without_coefficients
 	return (ret)
 
 # This function is responsible for finding the highest exponent present in the polynome
@@ -78,6 +83,6 @@ def	main():
 		return
 	get_variables()
 
-# "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
+# "5 * X^0 + 4 * X^1 - 9.3 * X^18 + X^0 = 1 * X^0"
 if __name__ == "__main__":
 	main()
