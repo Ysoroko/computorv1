@@ -65,10 +65,13 @@ def	get_highest_exponent(polynome):
 		lis.append(regex_sub_result)
 	return (int(max(lis)[0]))
 
+# Reads the string and stores variables in a dictionnary
 def	get_variables():
 	polynome = sys.argv[1]
-	exp = 0
+	pol_split = polynome.split("=", 1)
 	ex_max = get_highest_exponent(polynome)
+	exp = 0
+	print("SPLIT")
 	while (exp <= ex_max):
 		my_regex = get_regex(exp)
 		f0 = re.findall(my_regex, polynome)
