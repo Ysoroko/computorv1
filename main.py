@@ -30,21 +30,20 @@ def	sqrt(n):
 # 1) [\+\-]?	-->	starts with ['+' or '-']. '?' specifies that it starts
 #					with only 0 or 1 occurence of '+' or '-'
 #					(Example: in string "+-+-+-24" we will get "-24")
-# 2) [\s]*			--> followed by any amount of spaces
-# 3) [\d\.\d]*.	--> next section of the string must be composed of:
-# 					'\d' stands for digits, \. = '.' (so digits, '.', digits)
-# 					'*' specifies that any number of occurences can be present
-#					(-42.24576864 or 0 both satisfy the pattern)
+# 2) [\s]*		--> followed by any amount of spaces
+# 3) [\d]+		-->	next section of the string must be composed of:
+# 					at least one digit
+# 4) [\.]?[\d]* -->	next section will be composed of 0 or 1 '.' chars
+#					and any amount of digits
 # 4) [\s\*]+.	--> next section is composed of spaces and characters '*'
-#					'\s' stands for "spaces". Any number of occurrences is
-#					accepted
+#					'\s' stands for "spaces". at least 1 occurrence is accepted
 #					'+' stands for "at least one occurence of spaces or '*' must be there"
-# 5) {1}X\^		--> next section is composed of exactly one occurence
+# 5) X\^n{1}		--> next section is composed of exactly one occurence
 # 					of "X^" + str(current_exponent)
 # 					current exponent starts at 0 and goes up (X^0, X^1 etc)
 def	get_regex(current_exponent):
-	base_coeff = "[\+\-]?[\s]*[\d]+[\.]?[\d]?[\s\*]+X\^" + str(current_exponent)
-	with_coefficients = base_coeff + "[^\d]" + "|" + base_coeff + "$"
+	base_coeff = "[\+\-]?[\s]*[\d]+[\.]?[\d]*[\s\*]+X\^" + str(current_exponent) + "{1}"
+	with_coefficients = base_coeff + "[\s]?" + "|" + base_coeff + "$"
 
 	base_no_coeff = "[\+\-]?[\s]*X\^" + str(current_exponent)
 	without_coefficients = base_no_coeff + "[^\d]" + "|" + base_no_coeff + "$"
