@@ -65,6 +65,15 @@ def	get_highest_exponent(polynome):
 		lis.append(regex_sub_result)
 	return (int(max(lis)[0]))
 
+# This function will return the float which multiplies X^Something
+# Example: for a string "-4.79 * X^34" it will return a float "-4.79"
+def	get_the_coefficient(expr):
+	regex = "^[\+\-]?[\s]*[\d]+[\.]?[\d]*"
+	found = re.findall(regex, expr)
+	temp = str(found).strip("[\']")
+	result = "".join(temp.split())
+	return (float(result))
+
 # Reads the string and stores variables in a dictionnary
 def	get_variables():
 	polynome = sys.argv[1]
@@ -75,10 +84,13 @@ def	get_variables():
 		my_regex = get_regex(exp)
 		before_equal = re.findall(my_regex, pol_split[0])
 		after_equal = re.findall(my_regex, pol_split[1])
+		# Remove the spaces
 		for i, s in enumerate(before_equal):
 			before_equal[i] = s.strip()
+			get_the_coefficient(before_equal[i])
 		for i, s in enumerate(after_equal):
 			after_equal[i] = s.strip()
+		# ----------------
 		print(exp, before_equal, "=", after_equal)
 		exp+=1
 
