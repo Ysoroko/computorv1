@@ -23,6 +23,22 @@ def	sqrt(n):
 		y = n / x
 	return (x)
 
+# Returns the sign of float/int argument
+def	sign(f):
+	f_abs = abs(f)
+	if (f / f_abs == -1):
+		return (-1)
+	return (1)
+
+def	sign_char(f):
+	if (sign(f) == -1):
+		return ('-')
+	return '+'
+
+def	first_elem_sign(f):
+	if (sign(f) == -1):
+		return ('-')
+	return ('')
 # ---------------------------- Parsing functions ----------------------------
 
 # Regex explanation:
@@ -77,10 +93,21 @@ def	get_the_coefficient(expr):
 		result = "".join(temp.split())
 	return (float(result))
 
+# This function is responsible for the simplified form of the equation
 def	print_simplified_equation(lst):
+	equation = ""
 	for i in range(0, len(lst)):
-		if lst[i]:
-			print(str(lst[i]) + " * X^" + str(i) + " ", end = "")
+		elem = lst[i]
+		if elem:
+			sgn = first_elem_sign(elem)
+			space = ''
+			if (i):
+				sgn = sign_char(elem)
+				space = ' '
+			if elem.is_integer():
+				elem = int(elem)
+			equation += (str(sgn) + space + str(abs(elem)) + " * X^" + str(i) + " ")
+	print("Reduced form: " + equation)
 
 # Reads the string and stores variables in a dictionnary
 def	get_variables(polynome):
@@ -97,16 +124,15 @@ def	get_variables(polynome):
 			plus = get_the_coefficient(before_equal[i])
 			if (plus):
 				coefficient += plus
-		#print("before =:" + str(coefficient))
 		for i, s in enumerate(after_equal):
 			minus = get_the_coefficient(after_equal[i])
 			if (minus):
 				coefficient -= get_the_coefficient(after_equal[i])
-		#print("after =:" + str(coefficient))
 		lst.append(coefficient)
 		coefficient = 0
 		print(exp, before_equal, "=", after_equal)
 		exp+=1
+	print(lst)
 	print_simplified_equation(lst)
 	
 
