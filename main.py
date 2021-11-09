@@ -71,13 +71,16 @@ def	get_variables():
 	pol_split = polynome.split("=", 1)
 	ex_max = get_highest_exponent(polynome)
 	exp = 0
-	print("SPLIT")
 	while (exp <= ex_max):
 		my_regex = get_regex(exp)
-		f0 = re.findall(my_regex, polynome)
-		print(exp, f0)
+		before_equal = re.findall(my_regex, pol_split[0])
+		after_equal = re.findall(my_regex, pol_split[1])
+		for i, s in enumerate(before_equal):
+			before_equal[i] = s.strip()
+		for i, s in enumerate(after_equal):
+			after_equal[i] = s.strip()
+		print(exp, before_equal, "=", after_equal)
 		exp+=1
-		
 
 def	main():
 	if (len(sys.argv) != 2):
@@ -85,6 +88,5 @@ def	main():
 		return
 	get_variables()
 
-# "5 * X^0 + 4 * X^1 - 9.3 * X^18 + X^0 = 1 * X^0"
 if __name__ == "__main__":
 	main()
