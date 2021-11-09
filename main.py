@@ -68,37 +68,53 @@ def	get_highest_exponent(polynome):
 # This function will return the float which multiplies X^Something
 # Example: for a string "-4.79 * X^34" it will return a float "-4.79"
 def	get_the_coefficient(expr):
+	result = 0
+	expr_no_spaces = expr.strip()
 	regex = "^[\+\-]?[\s]*[\d]+[\.]?[\d]*"
-	found = re.findall(regex, expr)
-	temp = str(found).strip("[\']")
-	result = "".join(temp.split())
+	found = re.findall(regex, expr_no_spaces)
+	if (found):
+		temp = str(found).strip("[\']")
+		result = "".join(temp.split())
 	return (float(result))
 
+def	print_simplified_equation(lst):
+	for i in range(0, len(lst)):
+		if lst[i]:
+			print(str(lst[i]) + " * X^" + str(i) + " ", end = "")
+
 # Reads the string and stores variables in a dictionnary
-def	get_variables():
-	polynome = sys.argv[1]
+def	get_variables(polynome):
 	pol_split = polynome.split("=", 1)
 	ex_max = get_highest_exponent(polynome)
 	exp = 0
+	coefficient = 0
+	lst = []
 	while (exp <= ex_max):
 		my_regex = get_regex(exp)
 		before_equal = re.findall(my_regex, pol_split[0])
 		after_equal = re.findall(my_regex, pol_split[1])
-		# Remove the spaces
 		for i, s in enumerate(before_equal):
-			before_equal[i] = s.strip()
-			get_the_coefficient(before_equal[i])
+			plus = get_the_coefficient(before_equal[i])
+			if (plus):
+				coefficient += plus
+		#print("before =:" + str(coefficient))
 		for i, s in enumerate(after_equal):
-			after_equal[i] = s.strip()
-		# ----------------
+			minus = get_the_coefficient(after_equal[i])
+			if (minus):
+				coefficient -= get_the_coefficient(after_equal[i])
+		#print("after =:" + str(coefficient))
+		lst.append(coefficient)
+		coefficient = 0
 		print(exp, before_equal, "=", after_equal)
 		exp+=1
+	print_simplified_equation(lst)
+	
 
 def	main():
 	if (len(sys.argv) != 2):
 		print("Program arguments error")
 		return
-	get_variables()
+	get_variables(sys.argv[1])
 
 if __name__ == "__main__":
 	main()
