@@ -88,7 +88,8 @@ def	zero_discriminant(a, b, c):
 	print("The solution is:")
 	print(solution)
 
-def	first_degree_or_less(b, c)
+def	first_degree_or_less(b, c):
+	print("The solution is:")
 	if (not b and c):
 		solution = c
 	else:
@@ -96,12 +97,19 @@ def	first_degree_or_less(b, c)
 			solution = "All the reals (X can be anything)"
 		else:
 			solution = c / b
+	if (solution.is_integer()):
+		solution = int(solution)
+	print(solution)
 
 def	positive_discriminant(a, b, discriminant):
 	r = sqrt(discriminant)
 	denum = 1 if a == 0 else 2 * a
 	solution1 = (-1 * b - r) / denum
 	solution2 = (-1 * b + r) / denum
+	if (solution1.is_integer()):
+		solution1 = int(solution1)
+	if (solution2.is_integer()):
+		solution2 = int(solution2)
 	print(solution1)
 	print(solution2)
 
@@ -113,7 +121,7 @@ def	solve_the_equation(lst):
 	if (d < 2):
 		first_degree_or_less(b, c)
 	else:
-		get_the_discriminant(a, b, c)
+		discriminant = get_the_discriminant(a, b, c)
 		if (discriminant > 0):
 			positive_discriminant(a, b, discriminant)
 		elif (discriminant == 0):
@@ -138,7 +146,7 @@ def	solve_the_equation(lst):
 # 					of "X^" + str(current_exponent)
 # 					current exponent starts at 0 and goes up (X^0, X^1 etc)
 def	get_regex(current_exponent):
-	base_coeff = "[\+\-]?[\s]*[\d]+[\.]?[\d]*[\s\*]+X\^?" + str(current_exponent) + "{1}"
+	base_coeff = "[\+\-]?[\s]*[\d]*[\.]?[\d]*[\s\*]+X\^?" + str(current_exponent) + "{1}"
 	with_coefficients = base_coeff + "[\s]?" + "|" + base_coeff + "$"
 
 	base_no_coeff = "[\+\-]?[\s]*X\^" + str(current_exponent)
