@@ -128,18 +128,33 @@ def	print_simplified_equation(lst):
 # 2) Polynomials cannot contain negative exponents. "7 * X^-4"
 # 3) Polynomials cannot contain fractional exponents. "7 * X ^ 4.2"
 # 4) Polynomials cannot contain radicals. "7 * sqrt(X)"
-def	error_found(lowest_exponent):
+def	error_found(lowest_exponent, polynome):
 	if (lowest_exponent < 0):
 		print("Error: polynomials cannot contain negative exponents")
 		return (1)
+	if (polynome.find('=') == -1):
+		print("Error: no \"=\" sign in the polynome expression")
+		return (1)
 	return (0)
+
+# Prints the results:
+# 1) Simplified equation
+# 2) Polynomial degree
+# 3) Discriminant
+# 4) Solutions
+def	print_results(lst, degree):
+	print_simplified_equation(lst)
+	print("Polynomial degree: " + str(degree))
+	if (degree > 2):
+		print("The polynomial degree is stricly greater than 2, I can't solve.")
+		return
 
 # Reads the string and stores variables in a dictionnary
 def	get_variables(polynome):
 	pol_split = polynome.split("=", 1)
 	ex_max = get_highest_exponent(polynome)
 	exp = get_lowest_exponent(polynome)
-	if (error_found(exp)):
+	if (error_found(exp, polynome)):
 		return
 	print("EX_MAX: " + str(ex_max) + " EX_MIN: " + str(exp))
 	degree = ex_max - exp
@@ -162,7 +177,6 @@ def	get_variables(polynome):
 		coefficient = 0
 		print(exp, before_equal, "=", after_equal)
 		exp+=1
-	print(lst)
 	print_simplified_equation(lst)
 	print("Polynomial degree: " + str(degree))
 	

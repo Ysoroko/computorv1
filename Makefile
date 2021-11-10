@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/10 11:25:35 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/11/10 11:41:34 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,24 @@ test3:
 test4:
 	python3 main.py "42 ∗ X^0 = 42 ∗ X^0"
 
-# 5) Negative exponent ( = invalid polynome)
+# 5) All of the components cancel out (Reduced form: 0 = 0)
+#	Solution: [all the "reals"]
 test5:
+	python3 main.py "42 ∗ X^0 + 13.46 * X^1 - 1 * X^2 = 42 ∗ X^0 + 13.46 * X^1 - 1 * X^2"
+
+# 6) Check to see how the equation balances out
+#	Solution: 
+test6:
+	python3 main.py "42 * X^0 + 3.5 * X^1 - 0.256 * X^2 = 41 * X^0 + 1.75 * X^1 + 0.256 * X^2"
+
+#--------------------------------- ERROR CASES -----------------------------------
+# 5) Negative exponent ( = invalid polynome)
+test_error1:
 	python3 main.py "42 ∗ X^-2 - 3 * X^-1 + 1.4 * X^0 - 5 * X^1 + 3 * X^2 = 1.789 ∗ X^0"
+
+# 6) No "=" sign
+test_error2:
+	python3 main.py "5 * X^0 + 4 * X^1 - 9.3 * X^2"
+
+
 
