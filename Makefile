@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/09 15:14:22 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/11/10 11:25:35 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,4 +34,8 @@ test3:
 #	Solution: [all the "reals"]
 test4:
 	python3 main.py "42 ∗ X^0 = 42 ∗ X^0"
+
+# 5) Negative exponent ( = invalid polynome)
+test5:
+	python3 main.py "42 ∗ X^-2 - 3 * X^-1 + 1.4 * X^0 - 5 * X^1 + 3 * X^2 = 1.789 ∗ X^0"
 
