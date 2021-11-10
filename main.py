@@ -15,13 +15,29 @@ def	abs(n):
 # 2) Add 1 to our guess number and divide it by 2
 # 3) Repeat until our guess fits in the margin of error
 def	sqrt(n):
-	x = n
-	y = 1
-	error = 0.00000000000000001
-	while (x - y > error):
-		x = (x + y) / 2
-		y = n / x
+	x = n	# our guess: square root is equal to n itself
+	y = 1	# start our y at 1
+	error = 0.00000000000000001 # our margin of error
+	while (x - y > error):	# while our root value - our current difference is bigger than the error
+		x = (x + y) / 2		# our guess is added to our difference and divided by 2
+		y = n / x			# our current difference becomes our initial number, divided by our current guess
 	return (x)
+#	Example: sqrt(4)
+#	x = 4
+#	y = 1
+#	error = 0.00000000000000001
+#	While:
+#	1)	4 - 3 > 0.00000000000000001 OK
+#		x = (4 + 1) / 2 = 5 / 2 = [2.5]
+#		y = 4 / 2.5 = [1.6]
+#	2)	2.5 - 1.6 = 0.9 > 0.00000000000000001 OK
+#		x = (2.5 + 1.6) / 2 = [2.05]
+#		y = 4 / 2.05 = [1.95] (...)
+#	3)	2.05 - 1.95 = 0.1 > 0.00000000000000001 OK
+#		x = (2.05 + 1.95) / 2 = 4 / 2 = 2
+#		y = 4 / 2 = 2
+#	4)	2 - 2 = 0 > 0.00000000000000001 NO
+#		return (2)
 
 # Returns the sign of float/int argument
 def	sign(f):
@@ -30,15 +46,33 @@ def	sign(f):
 		return (-1)
 	return (1)
 
+# Returns sign in a form of a char '+' of '-'
 def	sign_char(f):
 	if (sign(f) == -1):
 		return ('-')
 	return '+'
 
+# Returns either '' or '-' based on whether its argument is > 0 or < 0
 def	first_elem_sign(f):
 	if (sign(f) == -1):
 		return ('-')
 	return ('')
+
+# A * X^2 + B * X^1 + C * X^0 = 0
+# The discriminant is defined as:
+# discriminant = B * B - (4 * A * C)
+# If it's > 0 -> there are 2 possible solutions
+# If it's = 0 -> there is only one possible solution
+# If it's < 0 -> no real solutions possible (but complex yes)
+def	get_the_discriminant(lst):
+	print(lst)
+	c = lst[0]
+	b = lst[1]
+	a = lst[2]
+
+	discriminant = b * b - (4 * a * c)
+	return (discriminant)
+
 # ---------------------------- Parsing functions ----------------------------
 
 # Regex explanation:
@@ -72,7 +106,7 @@ def	get_regex(current_exponent):
 def	get_highest_exponent(polynome):
 	regex = "X\^{1}[\-]?[\d]+[\s]*"
 	regex_result = re.findall(regex, polynome)
-	print(regex_result)
+	# print(regex_result)
 	regex2 = "[\-]?[\d]+"
 	lis = list()
 	for i in range (0, len(regex_result)):
@@ -85,7 +119,7 @@ def	get_highest_exponent(polynome):
 def	get_lowest_exponent(polynome):
 	regex = "X\^{1}[\-]?[\d]+[\s]*"
 	regex_result = re.findall(regex, polynome)
-	print(regex_result)
+	# print(regex_result)
 	regex2 = "[\-]?[\d]+"
 	lis = list()
 	for i in range (0, len(regex_result)):
@@ -138,7 +172,6 @@ def	error_found(lowest_exponent, polynome):
 	# Regex: anything other than spaces, digits, '.', '+', '-', '*', '=' 'X', '^'
 	regex_for_wrong_chars = "[^\d^\+^\-*^\=^X\^\^^\.^\s]+"
 	found_wrong_chars = re.findall(regex_for_wrong_chars, polynome)
-	print(found_wrong_chars)
 	if (found_wrong_chars and found_wrong_chars[0]):
 		print("Error: not accepted chars found in string")
 		return (1)
@@ -150,11 +183,12 @@ def	error_found(lowest_exponent, polynome):
 # 3) Discriminant
 # 4) Solutions
 def	print_results(lst, degree):
-	print_simplified_equation(lst)
+	equation = print_simplified_equation(lst)
 	print("Polynomial degree: " + str(degree))
 	if (degree > 2):
 		print("The polynomial degree is stricly greater than 2, I can't solve.")
-		return
+		return (False)
+	return (True)
 
 # Reads the string and stores variables in a dictionnary
 def	parse(polynome):
@@ -181,16 +215,21 @@ def	parse(polynome):
 					coefficient -= get_the_coefficient(after_equal[i])
 		lst.append(coefficient)
 		coefficient = 0
-		print(exp, before_equal, "=", after_equal)
+		# print(exp, before_equal, "=", after_equal)
 		exp+=1
-	print_results(lst, degree)
+	if (print_results(lst, degree)):
+		return (lst)
+	return (0)
 	
 
 def	main():
 	if (len(sys.argv) != 2):
-		print("Program arguments error")
+		print("Program argument must be a single polynomial expression")
 		return
-	parse(sys.argv[1])
+	list_of_coefficients = parse(sys.argv[1])
+	if (not list_of_coefficients):
+		return
+	print(get_the_discriminant(list_of_coefficients))
 
 if __name__ == "__main__":
 	main()

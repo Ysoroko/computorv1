@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/10 12:11:29 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/11/10 14:31:02 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ all: test1
 #	[0.905239]
 #	[-0.475131]
 test1:
-	python3 main.py "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 18 * X^0"
+	python3 main.py "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
 
 # 2) As given in the subject (1 X^0 on the right side of "=")
 #	Solution: [-0.25]
