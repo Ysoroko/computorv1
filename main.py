@@ -64,14 +64,60 @@ def	first_elem_sign(f):
 # If it's > 0 -> there are 2 possible solutions
 # If it's = 0 -> there is only one possible solution
 # If it's < 0 -> no real solutions possible (but complex yes)
-def	get_the_discriminant(lst):
-	print(lst)
-	c = lst[0]
-	b = lst[1]
-	a = lst[2]
-
+def	get_the_discriminant(a, b, c):
+	print("A: " + str(a) + " B: " + str(b) + " C: " + str(c))
 	discriminant = b * b - (4 * a * c)
+	if (discriminant > 0):
+		print("Discriminant is strictly positive, the two solutions are:")
+	elif (discriminant < 0):
+		print("Discriminant is strictly negative, no real solutions exist")
 	return (discriminant)
+
+def	degree(a, b, c):
+	if (not a and not b):
+		return (0)
+	if (not a and b):
+		return (1)
+	if (a):
+		return (2)
+
+# If the discriminant is 0, there is only one possible solution and it is:
+# -b / (2 * a)
+def	zero_discriminant(a, b, c):
+	solution = (-1 * b) / (2 * a)
+	print("The solution is:")
+	print(solution)
+
+def	first_degree_or_less(b, c)
+	if (not b and c):
+		solution = c
+	else:
+		if (not c):
+			solution = "All the reals (X can be anything)"
+		else:
+			solution = c / b
+
+def	positive_discriminant(a, b, discriminant):
+	r = sqrt(discriminant)
+	denum = 1 if a == 0 else 2 * a
+	solution1 = (-1 * b - r) / denum
+	solution2 = (-1 * b + r) / denum
+	print(solution1)
+	print(solution2)
+
+def	solve_the_equation(lst):
+	c = 0 if 0 >= len(lst) else lst[0]
+	b = 0 if 1 >= len(lst) else lst[1]
+	a = 0 if 2 >= len(lst) else lst[2]
+	d = degree(a, b, c)
+	if (d < 2):
+		first_degree_or_less(b, c)
+	else:
+		get_the_discriminant(a, b, c)
+		if (discriminant > 0):
+			positive_discriminant(a, b, discriminant)
+		elif (discriminant == 0):
+			zero_discriminant(a, b, c)
 
 # ---------------------------- Parsing functions ----------------------------
 
@@ -112,6 +158,8 @@ def	get_highest_exponent(polynome):
 	for i in range (0, len(regex_result)):
 		regex_sub_result = re.findall(regex2, regex_result[i])
 		lis.append(int(regex_sub_result[0]))
+	if (not lis):
+		return (0)
 	return (int(max(lis)))
 
 # This function is responsible for finding the lowest exponent present in the polynome
@@ -125,6 +173,8 @@ def	get_lowest_exponent(polynome):
 	for i in range (0, len(regex_result)):
 		regex_sub_result = re.findall(regex2, regex_result[i])
 		lis.append(int(regex_sub_result[0]))
+	if (not lis):
+		return (0)
 	return (int(min(lis)))
 
 # This function will return the float which multiplies X^Something
@@ -175,6 +225,9 @@ def	error_found(lowest_exponent, polynome):
 	if (found_wrong_chars and found_wrong_chars[0]):
 		print("Error: not accepted chars found in string")
 		return (1)
+	if (polynome.find('X') == -1):
+		print("Error: no \"X\" in the polynome expression")
+		return (1)
 	return (0)
 
 # Prints the results:
@@ -192,11 +245,11 @@ def	print_results(lst, degree):
 
 # Reads the string and stores variables in a dictionnary
 def	parse(polynome):
-	pol_split = polynome.split("=", 1)
-	ex_max = get_highest_exponent(polynome)
 	exp = get_lowest_exponent(polynome)
 	if (error_found(exp, polynome)):
 		return
+	pol_split = polynome.split("=", 1)
+	ex_max = get_highest_exponent(polynome)
 	degree = ex_max - exp
 	coefficient = 0
 	lst = []
@@ -223,13 +276,13 @@ def	parse(polynome):
 	
 
 def	main():
-	if (len(sys.argv) != 2):
+	if (len(sys.argv) != 2 or not sys.argv[1]):
 		print("Program argument must be a single polynomial expression")
 		return
 	list_of_coefficients = parse(sys.argv[1])
 	if (not list_of_coefficients):
 		return
-	print(get_the_discriminant(list_of_coefficients))
+	solve_the_equation(list_of_coefficients)
 
 if __name__ == "__main__":
 	main()
