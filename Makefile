@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/10 15:45:29 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/11/10 16:51:28 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,9 @@ test6:
 test7:
 	python3 main.py "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 18 * X^0 + 4 * X^1"
 
+
 # 8) X^2 with a null coefficient
+# NOT WORKING!
 test8:
 	python3 main.py "4 * X^0 + 3 * X^1 - X^2 = 0"
 #--------------------------------- ERROR CASES -----------------------------------

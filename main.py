@@ -58,6 +58,13 @@ def	first_elem_sign(f):
 		return ('-')
 	return ('')
 
+def	format_the_solution(solution):
+	if (solution.is_integer()):
+		ret = int(solution)
+	else:
+		ret = round(solution,6)
+	return (ret)
+
 # A * X^2 + B * X^1 + C * X^0 = 0
 # The discriminant is defined as:
 # discriminant = B * B - (4 * A * C)
@@ -86,7 +93,7 @@ def	degree(a, b, c):
 def	zero_discriminant(a, b, c):
 	solution = (-1 * b) / (2 * a)
 	print("The solution is:")
-	print(solution)
+	print(format_the_solution(solution))
 
 def	first_degree_or_less(b, c):
 	print("The solution is:")
@@ -99,7 +106,7 @@ def	first_degree_or_less(b, c):
 			solution = c / b
 	if (solution.is_integer()):
 		solution = int(solution)
-	print(solution)
+	print(format_the_solution(solution))
 
 def	positive_discriminant(a, b, discriminant):
 	r = sqrt(discriminant)
@@ -110,8 +117,8 @@ def	positive_discriminant(a, b, discriminant):
 		solution1 = int(solution1)
 	if (solution2.is_integer()):
 		solution2 = int(solution2)
-	print(solution1)
-	print(solution2)
+	print(format_the_solution(solution1))
+	print(format_the_solution(solution2))
 
 def	solve_the_equation(lst):
 	c = 0 if 0 >= len(lst) else lst[0]
