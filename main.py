@@ -107,7 +107,9 @@ def	print_simplified_equation(lst):
 			if elem.is_integer():
 				elem = int(elem)
 			equation += (str(sgn) + space + str(abs(elem)) + " * X^" + str(i) + " ")
-	print("Reduced form: " + equation)
+	if (equation == ""):
+		equation = "0 "
+	print("Reduced form: " + equation + "= 0")
 
 # Reads the string and stores variables in a dictionnary
 def	get_variables(polynome):
@@ -124,10 +126,11 @@ def	get_variables(polynome):
 			plus = get_the_coefficient(before_equal[i])
 			if (plus):
 				coefficient += plus
-		for i, s in enumerate(after_equal):
-			minus = get_the_coefficient(after_equal[i])
-			if (minus):
-				coefficient -= get_the_coefficient(after_equal[i])
+		if (after_equal and after_equal[0]):
+			for i, s in enumerate(after_equal):
+				minus = get_the_coefficient(after_equal[i])
+				if (minus):
+					coefficient -= get_the_coefficient(after_equal[i])
 		lst.append(coefficient)
 		coefficient = 0
 		print(exp, before_equal, "=", after_equal)
