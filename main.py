@@ -58,6 +58,9 @@ def	first_elem_sign(f):
 		return ('-')
 	return ('')
 
+# If the solution is an float with ".0" decimal part, transforms it into an int
+# Otherwise, rounds up the float value to display only 6 digits
+# as in the example in the subject
 def	format_the_solution(solution):
 	if (solution.is_integer()):
 		ret = int(solution)
@@ -80,6 +83,7 @@ def	get_the_discriminant(a, b, c):
 		print("Discriminant is strictly negative, no real solutions exist")
 	return (discriminant)
 
+# Returns the degree of the equation based on a,b and c values
 def	degree(a, b, c):
 	if (not a and not b):
 		return (0)
@@ -88,13 +92,8 @@ def	degree(a, b, c):
 	if (a):
 		return (2)
 
-# If the discriminant is 0, there is only one possible solution and it is:
-# -b / (2 * a)
-def	zero_discriminant(a, b, c):
-	solution = (-1 * b) / (2 * a)
-	print("The solution is:")
-	print(format_the_solution(solution))
-
+# Example: -32 * X^1 + 49 * X ^ 0 = 5 * X^0
+# One possible solution
 def	first_degree_or_less(b, c):
 	print("The solution is:")
 	if (not b and c):
@@ -108,9 +107,22 @@ def	first_degree_or_less(b, c):
 		solution = int(solution)
 	print(format_the_solution(solution))
 
+# Discriminant = 0:
+# Equation of degree 2
+# Only 1 Possible solution:
+# -b / (2 * a)
+def	zero_discriminant(a, b, c):
+	solution = (-1 * b) / (2 * a)
+	print("The solution is:")
+	print(format_the_solution(solution))
+
+# Positive discriminant:
+# Equation of degree 2
+# 2 Possible solutions:
+# 1) -b - sqrt(discriminant) / (2 * a)
+# 2) -b + sqrt(discriminant) / (2 * a)
 def	positive_discriminant(a, b, discriminant):
 	r = sqrt(discriminant)
-	denum = 1 if a == 0 else 2 * a
 	solution1 = (-1 * b - r) / denum
 	solution2 = (-1 * b + r) / denum
 	if (solution1.is_integer()):
