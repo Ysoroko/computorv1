@@ -130,10 +130,17 @@ def	print_simplified_equation(lst):
 # 4) Polynomials cannot contain radicals. "7 * sqrt(X)"
 def	error_found(lowest_exponent, polynome):
 	if (lowest_exponent < 0):
-		print("Error: polynomials cannot contain negative exponents")
+		print("Error: polynomial expressions cannot contain negative exponents")
 		return (1)
 	if (polynome.find('=') == -1):
 		print("Error: no \"=\" sign in the polynome expression")
+		return (1)
+	# Regex: anything other than spaces, digits, '.', '+', '-', '*', '=' 'X', '^'
+	regex_for_wrong_chars = "[^\d^\+^\-*^\=^X\^\^^\.^\s]+"
+	found_wrong_chars = re.findall(regex_for_wrong_chars, polynome)
+	print(found_wrong_chars)
+	if (found_wrong_chars and found_wrong_chars[0]):
+		print("Error: not accepted chars found in string")
 		return (1)
 	return (0)
 
@@ -150,13 +157,12 @@ def	print_results(lst, degree):
 		return
 
 # Reads the string and stores variables in a dictionnary
-def	get_variables(polynome):
+def	parse(polynome):
 	pol_split = polynome.split("=", 1)
 	ex_max = get_highest_exponent(polynome)
 	exp = get_lowest_exponent(polynome)
 	if (error_found(exp, polynome)):
 		return
-	print("EX_MAX: " + str(ex_max) + " EX_MIN: " + str(exp))
 	degree = ex_max - exp
 	coefficient = 0
 	lst = []
@@ -177,15 +183,14 @@ def	get_variables(polynome):
 		coefficient = 0
 		print(exp, before_equal, "=", after_equal)
 		exp+=1
-	print_simplified_equation(lst)
-	print("Polynomial degree: " + str(degree))
+	print_results(lst, degree)
 	
 
 def	main():
 	if (len(sys.argv) != 2):
 		print("Program arguments error")
 		return
-	get_variables(sys.argv[1])
+	parse(sys.argv[1])
 
 if __name__ == "__main__":
 	main()
