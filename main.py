@@ -123,6 +123,7 @@ def	zero_discriminant(a, b, c):
 # 2) -b + sqrt(discriminant) / (2 * a)
 def	positive_discriminant(a, b, discriminant):
 	r = sqrt(discriminant)
+	denum = 2 * a
 	solution1 = (-1 * b - r) / denum
 	solution2 = (-1 * b + r) / denum
 	if (solution1.is_integer()):
