@@ -133,6 +133,19 @@ def	positive_discriminant(a, b, discriminant):
 	print(format_the_solution(solution1))
 	print(format_the_solution(solution2))
 
+# Negative discriminant:
+# Equation of degree 2
+# 2 Possible complex solutions:
+# 1) -b - i * sqrt(discriminant) / (2 * a)
+# 2) -b + i * sqrt(discriminant) / (2 * a)
+def	negative_discriminant(a, b, discriminant):
+	r = str(sqrt(discriminant))
+	denum = str(2 * a)
+	b_s = str(b * -1)
+	solution1 = "(" + b_s + " - i * " + r + ") / " + denum
+	solution1 = "(" + b_s + " + i * " + r + ") / " + denum
+
+
 def	solve_the_equation(lst):
 	c = 0 if 0 >= len(lst) else lst[0]
 	b = 0 if 1 >= len(lst) else lst[1]
@@ -142,10 +155,13 @@ def	solve_the_equation(lst):
 		first_degree_or_less(b, c)
 	else:
 		discriminant = get_the_discriminant(a, b, c)
+		print("DISCRIMINANT: " + str(discriminant))
 		if (discriminant > 0):
 			positive_discriminant(a, b, discriminant)
 		elif (discriminant == 0):
 			zero_discriminant(a, b, c)
+		elif (discriminant < 0):
+			negative_discriminant(a, b, discriminant)
 
 # ---------------------------- Parsing functions ----------------------------
 
