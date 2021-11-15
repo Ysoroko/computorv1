@@ -17,7 +17,7 @@ def	abs(n):
 def	sqrt(n):
 	x = n	# our guess: square root is equal to n itself
 	y = 1	# start our y at 1
-	error = 0.00000000000000001 # our margin of error
+	error = 0.0000001 # our margin of error
 	while (x - y > error):	# while our root value - our current difference is bigger than the error
 		x = (x + y) / 2		# our guess is added to our difference and divided by 2
 		y = n / x			# our current difference becomes our initial number, divided by our current guess
@@ -95,6 +95,7 @@ def	degree(a, b, c):
 		return (2)
 
 # Example: -32 * X^1 + 49 * X ^ 0 = 5 * X^0
+# 44 - 32x = 0 --> x = 44 / 32
 # One possible solution
 def	first_degree_or_less(b, c):
 	print("The solution is:")
@@ -104,7 +105,7 @@ def	first_degree_or_less(b, c):
 		if (not c):
 			solution = "All the reals (X can be anything)"
 		else:
-			solution = c / b
+			solution = c / -b
 	if (type(solution) == float and solution.is_integer()):
 		solution = int(solution)
 	print(format_the_solution(solution))
