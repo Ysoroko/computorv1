@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/15 11:05:21 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/11/15 11:32:36 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,14 +46,26 @@ test6:
 	python3 main.py "42 * X^0 + 3.5 * X^1 - 0.256 * X^2 = 41 * X^0 + 1.75 * X^1 + 0.256 * X^2"
 
 # 7) Coefficients cancel out in the middle
+#	 Negative coefficient, complex solutions only!
 #	Solution:
 test7:
 	python3 main.py "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 18 * X^0 + 4 * X^1"
 
-
-# 8) X^2 with a null coefficient
-# NOT WORKING!
+# 9) Complex solutions
+#	x2 + 4x + 5 = 0
 test8:
+	python3 main.py "5 * X^0 + 4 * X^1 + 1 * X^2 = 0"
+
+# 10) Complex solutions
+# x2 - 3x + 10 = 0
+test9:
+	python3 main.py "10 * X^0 - 3 * X^1 + 1 * X^2 = 0"
+
+
+
+# 9) X^2 with a null coefficient
+# NOT WORKING!
+test10:
 	python3 main.py "4 * X^0 + 3 * X^1 - X^2 = 0"
 #--------------------------------- ERROR CASES -----------------------------------
 # 1) Negative exponent ( = invalid polynome)

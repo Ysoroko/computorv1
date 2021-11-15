@@ -143,9 +143,13 @@ def	positive_discriminant(a, b, discriminant):
 def	negative_discriminant(a, b, discriminant):
 	r = str(sqrt(discriminant))
 	denum = str(2 * a)
-	b_s = str(b * -1)
-	solution1 = "(" + b_s + " - i * " + r + ") / " + denum
-	solution1 = "(" + b_s + " + i * " + r + ") / " + denum
+	b_s = "" if not b else " " + str(b * -1)
+	sign = " + " if b else " "
+	solution1 = "(" + b_s + " - i * sqrt(" + r + ") ) / " + denum
+	solution2 = "(" + b_s + sign + "i * sqrt(" + r + ") ) / " + denum
+	print("The complex solutions are: ")
+	print(solution1)
+	print(solution2)
 
 
 def	solve_the_equation(lst):
