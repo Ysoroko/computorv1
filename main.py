@@ -64,14 +64,9 @@ def	first_elem_sign(f):
 def	format_the_solution(solution):
 	if (type(solution) == str):
 		return (solution)
-	if (solution.is_integer()):
+	ret = round(solution,6)
+	if (ret.is_integer()):
 		ret = int(solution)
-	else:
-		ret = round(solution,6)
-	print("ret: ", end=" ")
-	print(type(solution))
-	print(solution.is_integer())
-	print(ret)
 	return (ret)
 
 # A * X^2 + B * X^1 + C * X^0 = 0
