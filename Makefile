@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/15 11:32:36 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/11/15 14:28:49 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,9 +62,9 @@ test9:
 	python3 main.py "10 * X^0 - 3 * X^1 + 1 * X^2 = 0"
 
 
-
 # 9) X^2 with a null coefficient
-# NOT WORKING!
+#	Simplified version should be: [4 * X^0 + 3 * X^1 - 1 * X^2]
+#	Solutions are: [4][-1]
 test10:
 	python3 main.py "4 * X^0 + 3 * X^1 - X^2 = 0"
 #--------------------------------- ERROR CASES -----------------------------------

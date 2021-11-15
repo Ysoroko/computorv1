@@ -68,6 +68,10 @@ def	format_the_solution(solution):
 		ret = int(solution)
 	else:
 		ret = round(solution,6)
+	print("ret: ", end=" ")
+	print(type(solution))
+	print(solution.is_integer())
+	print(ret)
 	return (ret)
 
 # A * X^2 + B * X^1 + C * X^0 = 0
@@ -77,7 +81,7 @@ def	format_the_solution(solution):
 # If it's = 0 -> there is only one possible solution
 # If it's < 0 -> no real solutions possible (but complex yes)
 def	get_the_discriminant(a, b, c):
-	print("A: " + str(a) + " B: " + str(b) + " C: " + str(c))
+	# print("A: " + str(a) + " B: " + str(b) + " C: " + str(c))
 	discriminant = b * b - (4 * a * c)
 	if (discriminant > 0):
 		print("Discriminant is strictly positive, the two solutions are:")
@@ -129,12 +133,8 @@ def	positive_discriminant(a, b, discriminant):
 	denum = 2 * a
 	solution1 = (-1 * b - r) / denum
 	solution2 = (-1 * b + r) / denum
-	if (solution1.is_integer()):
-		solution1 = int(solution1)
-	if (solution2.is_integer()):
-		solution2 = int(solution2)
-	print(format_the_solution(solution1))
-	print(format_the_solution(solution2))
+	print(format_the_solution(float(solution1)))
+	print(format_the_solution(float(solution2)))
 
 # Negative discriminant:
 # Equation of degree 2
@@ -162,7 +162,7 @@ def	solve_the_equation(lst):
 		first_degree_or_less(b, c)
 	else:
 		discriminant = get_the_discriminant(a, b, c)
-		print("DISCRIMINANT: " + str(discriminant))
+		# print("DISCRIMINANT: " + str(discriminant))
 		if (discriminant > 0):
 			positive_discriminant(a, b, discriminant)
 		elif (discriminant == 0):
@@ -238,6 +238,8 @@ def	get_the_coefficient(expr):
 	if (found):
 		temp = str(found).strip("[\']")
 		result = "".join(temp.split())
+	elif (not found and expr.find("X")):
+		result = 1 if expr.find("-") else -1
 	return (float(result))
 
 # This function is responsible for the simplified form of the equation
