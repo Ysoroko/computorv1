@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/10 16:51:28 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/11/15 11:05:21 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ test5:
 	python3 main.py "42 * X^0 + 13.46 * X^1 - 1 * X^2 = 42 * X^0 + 13.46 * X^1 - 1 * X^2"
 
 # 6) Check to see how the equation balances out
-#	Solution: 
+#	Solution: [3.916642] [-0.498673]
 test6:
 	python3 main.py "42 * X^0 + 3.5 * X^1 - 0.256 * X^2 = 41 * X^0 + 1.75 * X^1 + 0.256 * X^2"
 

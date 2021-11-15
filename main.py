@@ -62,6 +62,8 @@ def	first_elem_sign(f):
 # Otherwise, rounds up the float value to display only 6 digits
 # as in the example in the subject
 def	format_the_solution(solution):
+	if (type(solution) == str):
+		return (solution)
 	if (solution.is_integer()):
 		ret = int(solution)
 	else:
@@ -103,7 +105,7 @@ def	first_degree_or_less(b, c):
 			solution = "All the reals (X can be anything)"
 		else:
 			solution = c / b
-	if (solution.is_integer()):
+	if (type(solution) == float and solution.is_integer()):
 		solution = int(solution)
 	print(format_the_solution(solution))
 
