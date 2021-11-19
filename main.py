@@ -137,9 +137,9 @@ def	positive_discriminant(a, b, discriminant):
 # 1) -b - i * sqrt(discriminant) / (2 * a)
 # 2) -b + i * sqrt(discriminant) / (2 * a)
 def	negative_discriminant(a, b, discriminant):
-	r = str(sqrt(discriminant))
-	denum = str(2 * a)
-	b_s = "" if not b else " " + str(b * -1)
+	r = str(format_the_solution(sqrt(discriminant)))
+	denum = str(format_the_solution(2 * a))
+	b_s = "" if not b else " " + str(format_the_solution(b * -1))
 	sign = " + " if b else " "
 	solution1 = "(" + b_s + " - i * sqrt(" + r + ") ) / " + denum
 	solution2 = "(" + b_s + sign + "i * sqrt(" + r + ") ) / " + denum
