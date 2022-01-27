@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 11:31:15 by ysoroko           #+#    #+#              #
-#    Updated: 2021/11/15 14:28:49 by ysoroko          ###   ########.fr        #
+#    Updated: 2022/01/27 17:18:54 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,17 +47,26 @@ test6:
 
 # 7) Coefficients cancel out in the middle
 #	 Negative coefficient, complex solutions only!
+#	 The complex solutions are:
+#	 ( - i * sqrt(-483.6) ) / -18.6
+#	 ( i * sqrt(-483.6) ) / -18.6
 #	Solution:
 test7:
 	python3 main.py "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 18 * X^0 + 4 * X^1"
 
 # 9) Complex solutions
 #	x2 + 4x + 5 = 0
+#	The complex solutions are:
+#	( -4 - i * sqrt(-4) ) / 2
+#	( -4 + i * sqrt(-4) ) / 2
 test8:
 	python3 main.py "5 * X^0 + 4 * X^1 + 1 * X^2 = 0"
 
 # 10) Complex solutions
-# x2 - 3x + 10 = 0
+# 	x2 - 3x + 10 = 0
+# 	The complex solutions are:
+# 	( 3 - i * sqrt(-31) ) / 2
+# 	( 3 + i * sqrt(-31) ) / 2
 test9:
 	python3 main.py "10 * X^0 - 3 * X^1 + 1 * X^2 = 0"
 
