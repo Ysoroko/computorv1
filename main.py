@@ -3,6 +3,26 @@
 import sys
 import re # for regular expressions
 
+# -------------------------- Colors and print utils --------------------------
+class c:
+    LINE_LENGTH = 65
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def	print_line(n):
+	print("-" * n)
+
+def print_equation(e):
+	print_line(c.LINE_LENGTH)
+	print(c.HEADER + "EQUATION: " + c.ENDC + e)
+	print_line(c.LINE_LENGTH)
 # -------------------------- Mathematical functions --------------------------
 def	abs(n):
 	if (n >= 0):
@@ -253,7 +273,7 @@ def	print_simplified_equation(lst):
 			equation += (str(sgn) + space + str(abs(elem)) + " * X^" + str(i) + " ")
 	if (equation == ""):
 		equation = "0 "
-	print("Reduced form: " + equation + "= 0")
+	print(c.OKCYAN + "Reduced form:\t\t" + c.ENDC + equation + "= 0")
 
 # What is not a polynome:
 # 1) Polynomials cannot contain division by a variable "7x/(1+x)"
@@ -261,6 +281,7 @@ def	print_simplified_equation(lst):
 # 3) Polynomials cannot contain fractional exponents. "7 * X ^ 4.2"
 # 4) Polynomials cannot contain radicals. "7 * sqrt(X)"
 def	error_found(lowest_exponent, polynome):
+	print(c.FAIL, end = "")
 	if (lowest_exponent < 0):
 		print("Error: polynomial expressions cannot contain negative exponents")
 		return (1)
@@ -285,7 +306,7 @@ def	error_found(lowest_exponent, polynome):
 # 4) Solutions
 def	print_results(lst, degree):
 	equation = print_simplified_equation(lst)
-	print("Polynomial degree: " + str(degree))
+	print(c.WARNING + "Polynomial degree:\t" + c.ENDC + str(degree))
 	if (degree > 2):
 		print("The polynomial degree is stricly greater than 2, I can't solve.")
 		return (False)
@@ -295,6 +316,7 @@ def	print_results(lst, degree):
 def	parse(polynome):
 	exp = get_lowest_exponent(polynome)
 	if (error_found(exp, polynome)):
+		print(c.ENDC, end = "")
 		return
 	pol_split = polynome.split("=", 1)
 	ex_max = get_highest_exponent(polynome)
@@ -327,6 +349,7 @@ def	main():
 	if (len(sys.argv) != 2 or not sys.argv[1]):
 		print("Program argument must be a single polynomial expression")
 		return
+	print_equation(sys.argv[1])
 	list_of_coefficients = parse(sys.argv[1])
 	if (not list_of_coefficients):
 		return
@@ -334,3 +357,4 @@ def	main():
 
 if __name__ == "__main__":
 	main()
+	print_line(c.LINE_LENGTH)
