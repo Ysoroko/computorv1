@@ -4,14 +4,14 @@ import sys
 import re # for regular expressions
 
 # -------------------------- Colors and print utils --------------------------
-class c:
+class colors:
     LINE_LENGTH = 65
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
+    MAGENTA = '\033[95m'
+    BLUE = '\033[94m'
+    CYAN = '\033[96m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
@@ -20,9 +20,9 @@ def	print_line(n):
 	print("-" * n)
 
 def print_equation(e):
-	print_line(c.LINE_LENGTH)
-	print(c.HEADER + "EQUATION: " + c.ENDC + e)
-	print_line(c.LINE_LENGTH)
+	print_line(colors.LINE_LENGTH)
+	print(colors.MAGENTA + "EQUATION: " + colors.ENDC + e)
+	print_line(colors.LINE_LENGTH)
 # -------------------------- Mathematical functions --------------------------
 def	abs(n):
 	if (n >= 0):
@@ -99,9 +99,9 @@ def	get_the_discriminant(a, b, c):
 	# print("A: " + str(a) + " B: " + str(b) + " C: " + str(c))
 	discriminant = b * b - (4 * a * c)
 	if (discriminant > 0):
-		print("Discriminant is strictly positive, the two solutions are:")
+		print(colors.RED + "Discriminant:\t\t" + colors.ENDC + "> 0" + "\tTwo real solutions exist") 
 	elif (discriminant < 0):
-		print("Discriminant is strictly negative, no real solutions exist")
+		print(colors.RED + "Discriminant:\t\t" + colors.ENDC + "< 0" + "\tNo real solutions exist") 
 	return (discriminant)
 
 # Returns the degree of the equation based on a,b and c values
@@ -117,7 +117,7 @@ def	degree(a, b, c):
 # 44 - 32x = 0 --> x = 44 / 32
 # One possible solution
 def	first_degree_or_less(b, c):
-	print("The solution is:")
+	print(colors.GREEN + "The solution is:" + colors.ENDC)
 	if (not b and c):
 		solution = c
 	else:
@@ -135,7 +135,7 @@ def	first_degree_or_less(b, c):
 # -b / (2 * a)
 def	zero_discriminant(a, b, c):
 	solution = (-1 * b) / (2 * a)
-	print("The solution is:")
+	print(colors.GREEN + "The solution is:" + colors.ENDC)
 	print(format_the_solution(solution))
 
 # Positive discriminant:
@@ -148,6 +148,7 @@ def	positive_discriminant(a, b, discriminant):
 	denum = 2 * a
 	solution1 = (-1 * b - r) / denum
 	solution2 = (-1 * b + r) / denum
+	print(colors.GREEN + "The solutions are:" + colors.ENDC)
 	print(format_the_solution(float(solution1)))
 	print(format_the_solution(float(solution2)))
 
@@ -163,7 +164,7 @@ def	negative_discriminant(a, b, discriminant):
 	sign = " + " if b else " "
 	solution1 = "(" + b_s + " - i * sqrt(" + r + ") ) / " + denum
 	solution2 = "(" + b_s + sign + "i * sqrt(" + r + ") ) / " + denum
-	print("The complex solutions are: ")
+	print(colors.GREEN + "The complex solutions are: " + colors.ENDC)
 	print(solution1)
 	print(solution2)
 
@@ -273,7 +274,7 @@ def	print_simplified_equation(lst):
 			equation += (str(sgn) + space + str(abs(elem)) + " * X^" + str(i) + " ")
 	if (equation == ""):
 		equation = "0 "
-	print(c.OKCYAN + "Reduced form:\t\t" + c.ENDC + equation + "= 0")
+	print(colors.CYAN + "Reduced form:\t\t" + colors.ENDC + equation + "= 0")
 
 # What is not a polynome:
 # 1) Polynomials cannot contain division by a variable "7x/(1+x)"
@@ -281,7 +282,7 @@ def	print_simplified_equation(lst):
 # 3) Polynomials cannot contain fractional exponents. "7 * X ^ 4.2"
 # 4) Polynomials cannot contain radicals. "7 * sqrt(X)"
 def	error_found(lowest_exponent, polynome):
-	print(c.FAIL, end = "")
+	print(colors.RED, end = "")
 	if (lowest_exponent < 0):
 		print("Error: polynomial expressions cannot contain negative exponents")
 		return (1)
@@ -306,7 +307,7 @@ def	error_found(lowest_exponent, polynome):
 # 4) Solutions
 def	print_results(lst, degree):
 	equation = print_simplified_equation(lst)
-	print(c.WARNING + "Polynomial degree:\t" + c.ENDC + str(degree))
+	print(colors.YELLOW + "Polynomial degree:\t" + colors.ENDC + str(degree))
 	if (degree > 2):
 		print("The polynomial degree is stricly greater than 2, I can't solve.")
 		return (False)
@@ -316,7 +317,7 @@ def	print_results(lst, degree):
 def	parse(polynome):
 	exp = get_lowest_exponent(polynome)
 	if (error_found(exp, polynome)):
-		print(c.ENDC, end = "")
+		print(colors.ENDC, end = "")
 		return
 	pol_split = polynome.split("=", 1)
 	ex_max = get_highest_exponent(polynome)
@@ -357,4 +358,4 @@ def	main():
 
 if __name__ == "__main__":
 	main()
-	print_line(c.LINE_LENGTH)
+	print_line(colors.LINE_LENGTH)
