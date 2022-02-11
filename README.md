@@ -1,7 +1,7 @@
 # Computorv1
-Polynomial equation solver, in Python.
+Polynomial equation solver, coded in Python.
 
-![image](https://user-images.githubusercontent.com/36443074/143218059-88a639ea-72e7-4cea-be78-c0f0ee737e62.png)
+![image](https://user-images.githubusercontent.com/36443074/153571769-3f15bf46-30c1-44f3-8824-3b32385a99d2.png)
 
 ### The project:
 
